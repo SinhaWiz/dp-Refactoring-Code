@@ -9,15 +9,15 @@ import edu.iutcs.cr.persons.Seller;
 import edu.iutcs.cr.system.SystemDatabase;
 import edu.iutcs.cr.vehicles.Vehicle;
 import edu.iutcs.cr.vehicles.VehicleFactory;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import edu.iutcs.cr.io.ConsoleIOHandler;
+import edu.iutcs.cr.io.IOHandler;
 
-/**
- * @author Raian Rahman
- * @since 4/19/2024
- */
 public class SystemFlowRunner {
+    private final IOHandler ioHandler;
+
+    public SystemFlowRunner() {
+        this.ioHandler = new ConsoleIOHandler();
+    }
 
     public static void run() {
         System.out.println("Welcome to Car Hut");

@@ -67,46 +67,36 @@ public class SystemDatabase implements Serializable {
 
     public void showInventory() {
         if (vehicles.isEmpty()) {
-            System.out.println("No vehicles is present in system");
-            return;
-        }
-
-        for (Vehicle vehicle : vehicles) {
-            System.out.println(vehicle.toString());
+            ioHandler.println("No vehicles is present in system");
+        } else {
+            vehicles.forEach(vehicle -> ioHandler.println(vehicle.toString()));
         }
     }
 
     public void showBuyerList() {
         if (buyers.isEmpty()) {
-            System.out.println("No buyer is present in system");
-            return;
-        }
-
-        for (Buyer buyer : buyers) {
-            System.out.println(buyer.toString());
+            ioHandler.println("No buyer is present in system");
+        } else {
+            buyers.forEach(buyer -> ioHandler.println(buyer.toString()));
         }
     }
 
     public void showSellerList() {
         if (sellers.isEmpty()) {
-            System.out.println("No seller is present in system");
-            return;
-        }
-
-        for (Seller seller : sellers) {
-            System.out.println(seller.toString());
+            ioHandler.println("No seller is present in system");
+        } else {
+            sellers.forEach(seller -> ioHandler.println(seller.toString()));
         }
     }
 
     public void showInvoices() {
         if(invoices.isEmpty()) {
-            System.out.println("No invoice found in system");
-            return;
-        }
-
-        for(Invoice invoice: invoices) {
-            invoice.printInvoice();
-            System.out.println("\n\n\n");
+            ioHandler.println("No invoice found in system");
+        } else {
+            invoices.forEach(invoice -> {
+                invoice.printInvoice();
+                ioHandler.println("\n\n\n");
+            });
         }
     }
 
@@ -145,4 +135,10 @@ public class SystemDatabase implements Serializable {
 
         return null;
     }
+
+    public IOHandler getIOHandler() {
+        return ioHandler;
+    }
+
+    private IOHandler ioHandler;
 }

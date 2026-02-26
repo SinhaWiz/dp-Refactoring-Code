@@ -2,10 +2,10 @@ package edu.iutcs.cr;
 
 import edu.iutcs.cr.system.SystemDatabase;
 import edu.iutcs.cr.vehicles.Vehicle;
+import edu.iutcs.cr.io.IOHandler;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 import static java.util.Objects.isNull;
@@ -18,6 +18,11 @@ public class ShoppingCart implements Serializable {
 
     private final Set<Vehicle> vehicles;
     private final SystemDatabase database;
+    private final IOHandler ioHandler;
+
+    public ShoppingCart(IOHandler ioHandler) {
+        this.ioHandler = ioHandler;
+    }
 
     public ShoppingCart() {
         this.vehicles = new HashSet<>();
@@ -29,15 +34,13 @@ public class ShoppingCart implements Serializable {
     }
 
     public void addItem() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter registration number of vehicle: ");
-        String registrationNumber = scanner.next();
+        ioHandler.print("Enter registration number of vehicle: ");
+        String registrationNumber = ioHandler.readLine();
 
         Vehicle vehicle = database.findVehicleByRegistrationNumber(registrationNumber);
 
         if (isNull(vehicle) || !vehicle.isAvailable()) {
-            System.out.println("Vehicle not available");
+            ioHandler.println("Vehicle not available");
             return;
         }
 
@@ -45,22 +48,21 @@ public class ShoppingCart implements Serializable {
     }
 
     public void removeItem() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the registration number of the vehicle: ");
-        String registrationNumber = scanner.nextLine();
+        ioHandler.print("Enter the registration number of the vehicle: ");
+        String registrationNumber = ioHandler.readLine();
         vehicles.remove(new Vehicle(registrationNumber));
     }
 
     public void viewCart() {
-        System.out.println("\n\nShopping cart\n\n");
+        ioHandler.println("\n\nShopping cart\n\n");
 
         if(vehicles.isEmpty()) {
-            System.out.println("Cart is empty");
+            ioHandler.println("Cart is empty");
             return;
         }
 
         for (Vehicle vehicle : vehicles) {
-            System.out.println(vehicle.toString());
+            ioHandler.println(vehicle.toString());
         }
     }
 }

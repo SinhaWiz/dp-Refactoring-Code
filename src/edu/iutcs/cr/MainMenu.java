@@ -1,28 +1,34 @@
 package edu.iutcs.cr;
 
 import java.util.Scanner;
+import edu.iutcs.cr.io.IOHandler;
 
 /**
  * @author Raian Rahman
  * @since 4/19/2024
  */
 public class MainMenu {
+    private final IOHandler ioHandler;
+
+    public MainMenu(IOHandler ioHandler) {
+        this.ioHandler = ioHandler;
+    }
 
     private void showMenu() {
-        System.out.println("Please enter the type of vehicle [1-9]: ");
-        System.out.println("1. Add new seller");
-        System.out.println("2. Add new customer");
-        System.out.println("3. Add car");
-        System.out.println("4. View inventory");
-        System.out.println("5. View seller list");
-        System.out.println("6. View buyer list");
+        ioHandler.println("Please enter the type of vehicle [1-9]: ");
+        ioHandler.println("1. Add new seller");
+        ioHandler.println("2. Add new customer");
+        ioHandler.println("3. Add car");
+        ioHandler.println("4. View inventory");
+        ioHandler.println("5. View seller list");
+        ioHandler.println("6. View buyer list");
 
-        System.out.println();
-        System.out.println("7. Add new order");
-        System.out.println("8. View all invoices");
+        ioHandler.println();
+        ioHandler.println("7. Add new order");
+        ioHandler.println("8. View all invoices");
 
-        System.out.println();
-        System.out.println("9. Save System and Exit");
+        ioHandler.println();
+        ioHandler.println("9. Save System and Exit");
     }
 
     public int showAndSelectOperation() {
