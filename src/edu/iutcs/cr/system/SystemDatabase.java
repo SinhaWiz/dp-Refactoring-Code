@@ -63,39 +63,4 @@ public class SystemDatabase implements Serializable {
         return invoices;
     }
 
-    public Vehicle findVehicleByRegistrationNumber(String registrationNumber) {
-        Vehicle newVehicle = new Vehicle(registrationNumber);
-
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle.equals(newVehicle)) {
-                return vehicle;
-            }
-        }
-
-        return null;
-    }
-
-    public Buyer findBuyerById(String id) {
-        Buyer newBuyer = new Buyer(id);
-
-        for (Buyer buyer : buyers) {
-            if (buyer.equals(newBuyer)) {
-                return buyer;
-            }
-        }
-
-        return null;
-    }
-
-    public Seller findSellerById(String id) {
-        Seller newSeller = new Seller(id);
-
-        for (Seller seller : sellers) {
-            if (seller.equals(newSeller)) {
-                return seller;
-            }
-        }
-
-        return null;
-    }
 }

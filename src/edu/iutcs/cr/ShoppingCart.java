@@ -1,6 +1,7 @@
 package edu.iutcs.cr;
 
 import edu.iutcs.cr.system.SystemDatabase;
+import edu.iutcs.cr.system.SystemRepository;
 import edu.iutcs.cr.vehicles.Vehicle;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -14,11 +15,11 @@ import java.util.Set;
 public class ShoppingCart implements Serializable {
 
     private final Set<Vehicle> vehicles;
-    private final SystemDatabase database;
+    private final SystemRepository repository;
 
     public ShoppingCart() {
         this.vehicles = new HashSet<>();
-        database = SystemDatabase.getInstance();
+        repository = new SystemRepository(SystemDatabase.getInstance());
     }
 
     public Set<Vehicle> getVehicles() {
@@ -26,7 +27,7 @@ public class ShoppingCart implements Serializable {
     }
 
     public void addItem(String registrationNumber) {
-        Vehicle vehicle = database.findVehicleByRegistrationNumber(registrationNumber);
+        Vehicle vehicle = repository.findVehicleByRegistrationNumber(registrationNumber);
 
         if (isNull(vehicle) || !vehicle.isAvailable()) {
             System.out.println("Vehicle not available");

@@ -2,6 +2,7 @@ package edu.iutcs.cr;
 
 import edu.iutcs.cr.commands.*;
 import edu.iutcs.cr.system.SystemDatabase;
+import edu.iutcs.cr.system.SystemRepository;
 import edu.iutcs.cr.view.ConsoleDisplay;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class SystemFlowRunner {
         Scanner scanner        = new Scanner(System.in);
         ConsoleInputHandler inputHandler = new ConsoleInputHandler(scanner);
         ConsoleDisplay display = new ConsoleDisplay(scanner);
+        SystemRepository repository = new SystemRepository(database);
         MainMenu mainMenu      = new MainMenu();
 
         Map<Integer, Command> commands = new HashMap<>();
@@ -32,7 +34,7 @@ public class SystemFlowRunner {
         commands.put(4, new ViewInventoryCommand(database, display));
         commands.put(5, new ViewSellerListCommand(database, display));
         commands.put(6, new ViewBuyerListCommand(database, display));
-        commands.put(7, new CreateOrderCommand(database, inputHandler, display));
+        commands.put(7, new CreateOrderCommand(database, repository, inputHandler, display));
         commands.put(8, new ViewInvoicesCommand(database, display));
         commands.put(9, new SaveAndExitCommand(database));
 
