@@ -116,6 +116,43 @@ public class ConsoleInputHandler {
         return paid;
     }
 
+    // ── Menu choice readers ────────────────────────────────────────────────────
+
+    /**
+     * Displays a prompt and validates a vehicle-type choice in the range [1, 5].
+     * Called by {@link edu.iutcs.cr.commands.AddVehicleCommand} after
+     * {@link edu.iutcs.cr.view.ConsoleDisplay#showVehicleTypeMenu()} has been shown.
+     */
+    public int readVehicleType() {
+        int type = -1;
+        while (type < 1 || type > 5) {
+            System.out.print("Enter your choice: ");
+            type = scanner.nextInt();
+            scanner.nextLine();
+            if (type < 1 || type > 5) {
+                System.out.println("Enter a valid vehicle type!");
+            }
+        }
+        return type;
+    }
+
+    /**
+     * Reads and validates a cart-operation choice in the range [1, 5].
+     * Called by {@link edu.iutcs.cr.commands.CreateOrderCommand} after
+     * {@link edu.iutcs.cr.view.ConsoleDisplay#showOrderMenu()} has been shown.
+     */
+    public int readCartOperation() {
+        int op = -1;
+        while (op < 1 || op > 5) {
+            op = scanner.nextInt();
+            scanner.nextLine();
+            if (op < 1 || op > 5) {
+                System.out.print("Please select a valid operation: ");
+            }
+        }
+        return op;
+    }
+
     // ── Internal utilities ────────────────────────────────────────────────────
 
     /**
