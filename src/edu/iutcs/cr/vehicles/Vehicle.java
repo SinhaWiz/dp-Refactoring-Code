@@ -2,13 +2,16 @@ package edu.iutcs.cr.vehicles;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.Scanner;
+
+import edu.iutcs.cr.io.IOHandler;
 
 /**
  * @author Raian Rahman
  * @since 4/18/2024
  */
-public class Vehicle implements Serializable {
+public abstract class Vehicle implements Serializable {
+
+    protected final IOHandler ioHandler;
 
     private String make;
     private String model;
@@ -17,13 +20,8 @@ public class Vehicle implements Serializable {
     private boolean available;
     private String registrationNumber;
 
-    public Vehicle() {
-        setRegistrationNumber();
-        setMake();
-        setModel();
-        setYear();
-        setPrice();
-        this.available = true;
+    public Vehicle(IOHandler ioHandler) {
+        this.ioHandler = ioHandler;
     }
 
     public Vehicle(String registrationNumber) {
@@ -35,14 +33,12 @@ public class Vehicle implements Serializable {
     }
 
     public void setRegistrationNumber() {
-        Scanner scanner = new Scanner(System.in);
-        while (this.registrationNumber == null || registrationNumber.isBlank()) {
-            System.out.print("Enter registration number: ");
-            this.registrationNumber = scanner.nextLine();
+        ioHandler.print("Enter registration number: ");
+        this.registrationNumber = ioHandler.readLine();
 
-            if (registrationNumber == null || registrationNumber.isBlank()) {
-                System.out.println("Registration number is mandatory!");
-            }
+        while (this.registrationNumber == null || this.registrationNumber.isBlank()) {
+            ioHandler.print("Registration number is mandatory!");
+            this.registrationNumber = ioHandler.readLine();
         }
     }
 
@@ -51,15 +47,12 @@ public class Vehicle implements Serializable {
     }
 
     public void setMake() {
-        Scanner scanner = new Scanner(System.in);
+        ioHandler.print("Enter make: ");
+        this.make = ioHandler.readLine();
 
         while (this.make == null || this.make.isBlank()) {
-            System.out.print("Enter make: ");
-            this.make = scanner.nextLine();
-
-            if (make == null || make.isBlank()) {
-                System.out.println("Make is mandatory!");
-            }
+            ioHandler.print("Make is mandatory!");
+            this.make = ioHandler.readLine();
         }
     }
 
@@ -68,15 +61,12 @@ public class Vehicle implements Serializable {
     }
 
     public void setModel() {
-        Scanner scanner = new Scanner(System.in);
+        ioHandler.print("Enter model: ");
+        this.model = ioHandler.readLine();
 
         while (this.model == null || this.model.isBlank()) {
-            System.out.print("Enter model: ");
-            this.model = scanner.nextLine();
-
-            if (model == null || model.isBlank()) {
-                System.out.println("Model is mandatory!");
-            }
+            ioHandler.print("Model is mandatory!");
+            this.model = ioHandler.readLine();
         }
     }
 
@@ -85,15 +75,12 @@ public class Vehicle implements Serializable {
     }
 
     public void setYear() {
-        Scanner scanner = new Scanner(System.in);
+        ioHandler.print("Enter year: ");
+        this.year = ioHandler.readLine();
 
         while (this.year == null || this.year.isBlank()) {
-            System.out.print("Enter year: ");
-            this.year = scanner.nextLine();
-
-            if (year == null || year.isBlank()) {
-                System.out.println("Year is mandatory!");
-            }
+            ioHandler.print("Year is mandatory!");
+            this.year = ioHandler.readLine();
         }
     }
 
@@ -102,9 +89,8 @@ public class Vehicle implements Serializable {
     }
 
     public void setPrice() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter price: ");
-        this.price = scanner.nextDouble();
+        ioHandler.print("Enter price: ");
+        this.price = ioHandler.nextDouble();
     }
 
     public boolean isAvailable() {

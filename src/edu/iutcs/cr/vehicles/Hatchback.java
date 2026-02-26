@@ -1,6 +1,6 @@
 package edu.iutcs.cr.vehicles;
 
-import java.util.Scanner;
+import edu.iutcs.cr.io.IOHandler;
 
 /**
  * @author Raian Rahman
@@ -8,27 +8,12 @@ import java.util.Scanner;
  */
 public class Hatchback extends Vehicle {
 
-    private boolean isCompact;
-
-    public Hatchback() {
-        super();
-        setCompact();
+    public Hatchback(IOHandler ioHandler) {
+        super(ioHandler);
     }
 
-    public boolean isCompact() {
-        return isCompact;
-    }
-
-    public void setCompact() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Is the hatchback compact? (true/false): ");
-        this.isCompact = scanner.nextBoolean();
-    }
-
-    @Override
-    public String toString() {
-        return "Hatchback{" + super.toString() + ", " +
-                "isCompact=" + isCompact() +
-                "}";
+    public void updateDetails() {
+        ioHandler.print("Enter hatchback-specific detail: ");
+        this.someDetail = ioHandler.readLine();
     }
 }

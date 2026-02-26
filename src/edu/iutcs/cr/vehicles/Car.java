@@ -1,7 +1,7 @@
 package edu.iutcs.cr.vehicles;
 
+import edu.iutcs.cr.io.IOHandler;
 import java.io.Serializable;
-import java.util.Scanner;
 
 /**
  * @author Raian Rahman
@@ -11,9 +11,9 @@ public class Car extends Vehicle implements Serializable {
 
     int seatingCapacity;
 
-    public Car() {
+    public Car(IOHandler ioHandler) {
         super();
-        setSeatingCapacity();
+        this.ioHandler = ioHandler;
     }
 
     public int getSeatingCapacity() {
@@ -21,9 +21,8 @@ public class Car extends Vehicle implements Serializable {
     }
 
     public void setSeatingCapacity() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter new seating capacity: ");
-        this.seatingCapacity = scanner.nextInt();
+        ioHandler.print("Enter new seating capacity: ");
+        this.seatingCapacity = ioHandler.readInt();
     }
 
     @Override
@@ -32,4 +31,6 @@ public class Car extends Vehicle implements Serializable {
                 "seatingCapacity=" + getSeatingCapacity() +
                 "}";
     }
+
+    private final IOHandler ioHandler;
 }

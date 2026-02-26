@@ -1,7 +1,7 @@
 package edu.iutcs.cr.vehicles;
 
 import java.io.Serializable;
-import java.util.Scanner;
+import edu.iutcs.cr.io.IOHandler;
 
 /**
  * @author Raian Rahman
@@ -12,9 +12,9 @@ public class SUV extends Vehicle implements Serializable {
     private boolean isOffRoad;
 
     // Constructor
-    public SUV() {
+    public SUV(IOHandler ioHandler) {
         super();
-        setOffRoad();
+        this.ioHandler = ioHandler;
     }
 
     // Getters and setters
@@ -23,9 +23,8 @@ public class SUV extends Vehicle implements Serializable {
     }
 
     public void setOffRoad() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Is the SUV for off-road use? (true/false): ");
-        this.isOffRoad = scanner.nextBoolean();
+        ioHandler.print("Is the SUV for off-road use? (true/false): ");
+        this.isOffRoad = ioHandler.readBoolean();
     }
 
     @Override
