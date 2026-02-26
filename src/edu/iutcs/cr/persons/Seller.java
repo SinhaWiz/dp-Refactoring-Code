@@ -8,10 +8,11 @@ import java.io.Serializable;
  */
 public class Seller extends Person implements Serializable {
 
-    public Seller() {
-        super();
+    public Seller(String name, String id, String email) {
+        super(name, id, email);
     }
 
+    /** Lookup-only constructor — only id is required for equality checks. */
     public Seller(String id) {
         super(id);
     }

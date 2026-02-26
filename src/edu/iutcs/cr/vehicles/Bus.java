@@ -1,7 +1,6 @@
 package edu.iutcs.cr.vehicles;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 /**
  * @author Raian Rahman
@@ -11,19 +10,17 @@ public class Bus extends Vehicle implements Serializable {
 
     int passengerCapacity;
 
-    public Bus() {
-        super();
-        setPassengerCapacity();
+    public Bus(String registrationNumber, String make, String model, String year, double price, int passengerCapacity) {
+        super(registrationNumber, make, model, year, price);
+        this.passengerCapacity = passengerCapacity;
     }
 
     public int getPassengerCapacity() {
         return passengerCapacity;
     }
 
-    public void setPassengerCapacity() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter new passenger capacity: ");
-        this.passengerCapacity = scanner.nextInt();
+    public void setPassengerCapacity(int passengerCapacity) {
+        this.passengerCapacity = passengerCapacity;
     }
 
     @Override

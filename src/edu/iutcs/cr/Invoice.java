@@ -3,10 +3,8 @@ package edu.iutcs.cr;
 import edu.iutcs.cr.persons.Buyer;
 import edu.iutcs.cr.persons.Seller;
 import edu.iutcs.cr.vehicles.Vehicle;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 /**
  * @author Raian Rahman
@@ -20,12 +18,12 @@ public class Invoice implements Serializable {
     private boolean isPaid;
     private final LocalDateTime dateTime;
 
-    public Invoice(Buyer buyer, Seller seller, ShoppingCart shoppingCart) {
+    public Invoice(Buyer buyer, Seller seller, ShoppingCart shoppingCart, boolean isPaid) {
         this.buyer = buyer;
         this.seller = seller;
         this.shoppingCart = shoppingCart;
-        takePayment();
-        markCarAsUnavailable();
+        this.isPaid = isPaid;
+        markVehiclesAsUnavailable();
         dateTime = LocalDateTime.now();
     }
 
@@ -38,15 +36,8 @@ public class Invoice implements Serializable {
         this.shoppingCart.viewCart();
     }
 
-    public void takePayment() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Is payment done (true/false): ");
-        this.isPaid = scanner.nextBoolean();
-    }
-
-    private void markCarAsUnavailable() {
-        for(Vehicle vehicle: shoppingCart.getVehicles()) {
+    private void markVehiclesAsUnavailable() {
+        for (Vehicle vehicle : shoppingCart.getVehicles()) {
             vehicle.setUnavailable();
         }
     }

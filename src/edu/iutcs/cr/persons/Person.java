@@ -2,7 +2,6 @@ package edu.iutcs.cr.persons;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * @author Raian Rahman
@@ -14,12 +13,13 @@ public class Person implements Serializable {
     private String id;
     private String email;
 
-    public Person() {
-        setName();
-        setId();
-        setEmail();
+    public Person(String name, String id, String email) {
+        this.name = name;
+        this.id = id;
+        this.email = email;
     }
 
+    /** Lookup-only constructor — only id is required for equality checks. */
     public Person(String id) {
         this.id = id;
     }
@@ -28,51 +28,24 @@ public class Person implements Serializable {
         return name;
     }
 
-    public void setName() {
-        Scanner scanner = new Scanner(System.in);
-
-        while (this.name == null || this.name.isBlank()) {
-            System.out.print("Enter name: ");
-            this.name = scanner.nextLine();
-
-            if (name == null || name.isBlank()) {
-                System.out.println("Name is mandatory!");
-            }
-        }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId() {
-        Scanner scanner = new Scanner(System.in);
-
-        while (this.id == null || this.id.isBlank()) {
-            System.out.print("Enter id: ");
-            this.id = scanner.nextLine();
-
-            if (id == null || id.isBlank()) {
-                System.out.println("Id is mandatory!");
-            }
-        }
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail() {
-        Scanner scanner = new Scanner(System.in);
-
-        while (this.email == null || this.email.isBlank()) {
-            System.out.print("Enter email: ");
-            this.email = scanner.nextLine();
-
-            if (email == null || email.isBlank()) {
-                System.out.println("Email is mandatory!");
-            }
-        }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -86,7 +59,6 @@ public class Person implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Person person)) return false;
-
         return Objects.equals(id, person.id);
     }
 
