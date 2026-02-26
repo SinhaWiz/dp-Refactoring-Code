@@ -1,9 +1,9 @@
 package edu.iutcs.cr;
 
+import edu.iutcs.cr.io.IOHandler;
 import edu.iutcs.cr.persons.Buyer;
 import edu.iutcs.cr.persons.Seller;
 import edu.iutcs.cr.vehicles.Vehicle;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -19,21 +19,23 @@ public class Invoice implements Serializable {
     private final ShoppingCart shoppingCart;
     private boolean isPaid;
     private final LocalDateTime dateTime;
+    private final IOHandler ioHandler;
 
-    public Invoice(Buyer buyer, Seller seller, ShoppingCart shoppingCart) {
+    public Invoice(Buyer buyer, Seller seller, ShoppingCart shoppingCart, IOHandler ioHandler) {
         this.buyer = buyer;
         this.seller = seller;
         this.shoppingCart = shoppingCart;
         takePayment();
         markCarAsUnavailable();
         dateTime = LocalDateTime.now();
+        this.ioHandler = ioHandler;
     }
 
     public void printInvoice() {
-        System.out.println("Buyer: " + this.buyer.toString());
-        System.out.println("Seller: " + this.seller.toString());
-        System.out.println("Payment Status: " + (isPaid ? "Paid" : "Due"));
-        System.out.println("Date: " + dateTime.toLocalDate() + " Time: " + dateTime.toLocalTime());
+        ioHandler.println("Buyer: " + this.buyer.toString());
+        ioHandler.println("Seller: " + this.seller.toString());
+        ioHandler.println("Payment Status: " + (isPaid ? "Paid" : "Due"));
+        ioHandler.println("Date: " + dateTime.toLocalDate() + " Time: " + dateTime.toLocalTime());
 
         this.shoppingCart.viewCart();
     }
