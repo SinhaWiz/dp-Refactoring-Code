@@ -25,20 +25,20 @@ public class MainMenu {
         System.out.println("9. Save System and Exit");
     }
 
-    public int showAndSelectOperation() {
+    public MenuOption showAndSelectOperation() {
         Scanner scanner = new Scanner(System.in);
         showMenu();
-        int selectedOperation = -1;
+        int code = -1;
 
-        while(selectedOperation<1 || selectedOperation>9) {
+        while (code < MenuOption.minCode() || code > MenuOption.maxCode()) {
             System.out.print("Enter your choice: ");
-            selectedOperation = scanner.nextInt();
+            code = scanner.nextInt();
 
-            if(selectedOperation<1 || selectedOperation>9) {
+            if (code < MenuOption.minCode() || code > MenuOption.maxCode()) {
                 System.out.print("Enter a valid operation: ");
             }
         }
 
-        return selectedOperation;
+        return MenuOption.fromCode(code);
     }
 }

@@ -5,7 +5,6 @@ import edu.iutcs.cr.persons.Buyer;
 import edu.iutcs.cr.persons.Seller;
 import edu.iutcs.cr.vehicles.Vehicle;
 import java.io.Serializable;
-import static java.util.Objects.isNull;
 import java.util.Set;
 
 /**
@@ -19,7 +18,7 @@ public class SystemDatabase implements Serializable {
     private Set<Vehicle> vehicles;
     private Set<Invoice> invoices;
 
-    private static SystemDatabase instance;
+    private static final SystemDatabase INSTANCE = new SystemDatabase();
 
     private SystemDatabase() {
         DataStore dataStore = new DataStore();
@@ -31,11 +30,7 @@ public class SystemDatabase implements Serializable {
     }
 
     public static SystemDatabase getInstance() {
-        if (isNull(instance)) {
-            instance = new SystemDatabase();
-        }
-
-        return instance;
+        return INSTANCE;
     }
 
     public void saveSystem() {

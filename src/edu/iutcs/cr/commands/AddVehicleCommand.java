@@ -3,6 +3,7 @@ package edu.iutcs.cr.commands;
 import edu.iutcs.cr.ConsoleInputHandler;
 import edu.iutcs.cr.system.SystemDatabase;
 import edu.iutcs.cr.vehicles.Vehicle;
+import edu.iutcs.cr.vehicles.VehicleType;
 import edu.iutcs.cr.view.ConsoleDisplay;
 
 /**
@@ -27,14 +28,14 @@ public class AddVehicleCommand implements Command {
     public void execute() {
         System.out.println("\n\n\nAdd new vehicle");
         display.showVehicleTypeMenu();
-        int vehicleType = inputHandler.readVehicleType();
+        VehicleType vehicleType = inputHandler.readVehicleType();
 
         Vehicle newItem = switch (vehicleType) {
-            case 1 -> { System.out.println("\n\nCreate new bus");      yield inputHandler.readBus(); }
-            case 2 -> { System.out.println("\n\nCreate new car");      yield inputHandler.readCar(); }
-            case 3 -> { System.out.println("\n\nCreate new hatchback"); yield inputHandler.readHatchback(); }
-            case 4 -> { System.out.println("\n\nCreate new sedan");    yield inputHandler.readSedan(); }
-            default -> { System.out.println("\n\nCreate new SUV");     yield inputHandler.readSUV(); }
+            case BUS      -> { System.out.println("\n\nCreate new bus");       yield inputHandler.readBus(); }
+            case CAR      -> { System.out.println("\n\nCreate new car");       yield inputHandler.readCar(); }
+            case HATCHBACK -> { System.out.println("\n\nCreate new hatchback"); yield inputHandler.readHatchback(); }
+            case SEDAN    -> { System.out.println("\n\nCreate new sedan");     yield inputHandler.readSedan(); }
+            case SUV      -> { System.out.println("\n\nCreate new SUV");       yield inputHandler.readSUV(); }
         };
 
         database.getVehicles().add(newItem);

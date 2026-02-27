@@ -1,5 +1,6 @@
 package edu.iutcs.cr.commands;
 
+import edu.iutcs.cr.CartOperation;
 import edu.iutcs.cr.ConsoleInputHandler;
 import edu.iutcs.cr.Invoice;
 import edu.iutcs.cr.ShoppingCart;
@@ -40,19 +41,14 @@ public class CreateOrderCommand implements Command {
 
         while (true) {
             display.showOrderMenu();
-            int op = inputHandler.readCartOperation();
+            CartOperation op = inputHandler.readCartOperation();
 
-            if (op == 1) {
-                cart.addItem(inputHandler.readRegistrationNumber("Enter registration number of vehicle: "));
-            } else if (op == 2) {
-                cart.removeItem(inputHandler.readRegistrationNumber("Enter the registration number of the vehicle: "));
-            } else if (op == 3) {
-                cart.viewCart();
-            } else if (op == 4) {
-                confirmPurchase(cart);
-                return;
-            } else {
-                return;
+            switch (op) {
+                case ADD_VEHICLE    -> cart.addItem(inputHandler.readRegistrationNumber("Enter registration number of vehicle: "));
+                case REMOVE_VEHICLE -> cart.removeItem(inputHandler.readRegistrationNumber("Enter the registration number of the vehicle: "));
+                case VIEW_CART      -> cart.viewCart();
+                case CONFIRM_PURCHASE -> { confirmPurchase(cart); return; }
+                case RETURN_TO_MENU   -> { return; }
             }
         }
     }

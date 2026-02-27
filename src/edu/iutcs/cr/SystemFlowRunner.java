@@ -27,20 +27,20 @@ public class SystemFlowRunner {
         SystemRepository repository = new SystemRepository(database);
         MainMenu mainMenu      = new MainMenu();
 
-        Map<Integer, Command> commands = new HashMap<>();
-        commands.put(1, new AddSellerCommand(database, inputHandler, display));
-        commands.put(2, new AddBuyerCommand(database, inputHandler, display));
-        commands.put(3, new AddVehicleCommand(database, inputHandler, display));
-        commands.put(4, new ViewInventoryCommand(database, display));
-        commands.put(5, new ViewSellerListCommand(database, display));
-        commands.put(6, new ViewBuyerListCommand(database, display));
-        commands.put(7, new CreateOrderCommand(database, repository, inputHandler, display));
-        commands.put(8, new ViewInvoicesCommand(database, display));
-        commands.put(9, new SaveAndExitCommand(database));
+        Map<MenuOption, Command> commands = new HashMap<>();
+        commands.put(MenuOption.ADD_SELLER,     new AddSellerCommand(database, inputHandler, display));
+        commands.put(MenuOption.ADD_BUYER,      new AddBuyerCommand(database, inputHandler, display));
+        commands.put(MenuOption.ADD_VEHICLE,    new AddVehicleCommand(database, inputHandler, display));
+        commands.put(MenuOption.VIEW_INVENTORY, new ViewInventoryCommand(database, display));
+        commands.put(MenuOption.VIEW_SELLERS,   new ViewSellerListCommand(database, display));
+        commands.put(MenuOption.VIEW_BUYERS,    new ViewBuyerListCommand(database, display));
+        commands.put(MenuOption.CREATE_ORDER,   new CreateOrderCommand(database, repository, inputHandler, display));
+        commands.put(MenuOption.VIEW_INVOICES,  new ViewInvoicesCommand(database, display));
+        commands.put(MenuOption.SAVE_AND_EXIT,  new SaveAndExitCommand(database));
 
         while (true) {
             System.out.println("\n\n\n");
-            int selectedOperation = mainMenu.showAndSelectOperation();
+            MenuOption selectedOperation = mainMenu.showAndSelectOperation();
             commands.get(selectedOperation).execute();
         }
     }
