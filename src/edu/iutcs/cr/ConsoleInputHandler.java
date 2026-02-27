@@ -23,9 +23,7 @@ public class ConsoleInputHandler {
         this.scanner = scanner;
     }
 
-    // ── Person helpers ────────────────────────────────────────────────────────
-
-    /** Prompts for all Seller fields and returns a fully constructed {@link Seller}. */
+    
     public Seller readSeller() {
         String name  = readRequiredString("Enter name: ",  "Name is mandatory!");
         String id    = readRequiredString("Enter id: ",    "Id is mandatory!");
@@ -33,7 +31,6 @@ public class ConsoleInputHandler {
         return new Seller(name, id, email);
     }
 
-    /** Prompts for all Buyer fields and returns a fully constructed {@link Buyer}. */
     public Buyer readBuyer() {
         String name  = readRequiredString("Enter name: ",  "Name is mandatory!");
         String id    = readRequiredString("Enter id: ",    "Id is mandatory!");
@@ -43,9 +40,7 @@ public class ConsoleInputHandler {
         return new Buyer(name, id, email, paymentMethod);
     }
 
-    // ── Vehicle helpers ───────────────────────────────────────────────────────
-
-    /** Prompts for all Bus fields and returns a fully constructed {@link Bus}. */
+    
     public Bus readBus() {
         VehicleBaseData base = readVehicleBaseFields();
         System.out.print("Enter passenger capacity: ");
@@ -54,7 +49,6 @@ public class ConsoleInputHandler {
         return new Bus(base.registrationNumber(), base.make(), base.model(), base.year(), base.price(), passengerCapacity);
     }
 
-    /** Prompts for all Car fields and returns a fully constructed {@link Car}. */
     public Car readCar() {
         VehicleBaseData base = readVehicleBaseFields();
         System.out.print("Enter seating capacity: ");
@@ -63,7 +57,6 @@ public class ConsoleInputHandler {
         return new Car(base.registrationNumber(), base.make(), base.model(), base.year(), base.price(), seatingCapacity);
     }
 
-    /** Prompts for all Hatchback fields and returns a fully constructed {@link Hatchback}. */
     public Hatchback readHatchback() {
         VehicleBaseData base = readVehicleBaseFields();
         System.out.print("Is the hatchback compact? (true/false): ");
@@ -72,7 +65,6 @@ public class ConsoleInputHandler {
         return new Hatchback(base.registrationNumber(), base.make(), base.model(), base.year(), base.price(), isCompact);
     }
 
-    /** Prompts for all Sedan fields and returns a fully constructed {@link Sedan}. */
     public Sedan readSedan() {
         VehicleBaseData base = readVehicleBaseFields();
         System.out.print("Does the sedan have a sunroof? (true/false): ");
@@ -81,7 +73,6 @@ public class ConsoleInputHandler {
         return new Sedan(base.registrationNumber(), base.make(), base.model(), base.year(), base.price(), hasSunroof);
     }
 
-    /** Prompts for all SUV fields and returns a fully constructed {@link SUV}. */
     public SUV readSUV() {
         VehicleBaseData base = readVehicleBaseFields();
         System.out.print("Is the SUV for off-road use? (true/false): ");
@@ -90,34 +81,27 @@ public class ConsoleInputHandler {
         return new SUV(base.registrationNumber(), base.make(), base.model(), base.year(), base.price(), isOffRoad);
     }
 
-    // ── Misc helpers ──────────────────────────────────────────────────────────
-
-    /** Prompts for and returns a vehicle registration number. */
-    public String readRegistrationNumber(String prompt) {
+    
+     public String readRegistrationNumber(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine().trim();
     }
 
-    /** Prompts for and returns a buyer ID string. */
     public String readBuyerId() {
         return readRequiredString("Enter buyer id: ", "Buyer id is mandatory!");
     }
 
-    /** Prompts for and returns a seller ID string. */
     public String readSellerId() {
         return readRequiredString("Enter seller id: ", "Seller id is mandatory!");
     }
 
-    /** Prompts for payment confirmation and returns the boolean result. */
     public boolean readPaymentStatus() {
         System.out.print("Is payment done (true/false): ");
         boolean paid = scanner.nextBoolean();
         scanner.nextLine();
         return paid;
     }
-
-    // ── Menu choice readers ────────────────────────────────────────────────────
-
+    
     /**
      * Displays a prompt and validates a vehicle-type choice in the range [1, 5].
      * Called by {@link edu.iutcs.cr.commands.AddVehicleCommand} after
@@ -153,8 +137,7 @@ public class ConsoleInputHandler {
         return CartOperation.fromCode(code);
     }
 
-    // ── Internal utilities ────────────────────────────────────────────────────
-
+    
     /**
      * Reads the five fields shared by every Vehicle subclass.
      *
@@ -171,7 +154,6 @@ public class ConsoleInputHandler {
         return new VehicleBaseData(regNo, make, model, year, price);
     }
 
-    /** Keeps re-prompting until a non-blank value is entered. */
     private String readRequiredString(String prompt, String errorMessage) {
         String value = null;
         while (value == null || value.isBlank()) {
